@@ -1,0 +1,74 @@
+{
+  "name": "ydesign-vue",
+  "version": "1.0.0",
+  "description": "YDesign Component for vue",
+  "main": "lib/index-lib.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ptt123/ydesign-vue.git"
+  },
+  "homepage": "https://github.com/ptt123/ydesign-vue/README.md",
+  "bugs": {
+    "url": "https://github.com/ptt123/ydesign-vue/issues"
+  },
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "cd site && vite",
+    "site:build": "cd site && vite build --debug",
+    "test": "npm run test:unit && npm run test:node",
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "prepare": "husky install",
+    "lint:lint-staged": "lint-staged",
+    "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "ydesign",
+    "typescript"
+  ],
+  "author": "ydesign",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
+    "@vitejs/plugin-vue": "^3.1.0",
+    "@vitejs/plugin-vue-jsx": "^2.0.1",
+    "ant-design-vue": "^3.2.12",
+    "commitizen": "^4.2.5",
+    "eslint": "^8.23.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.4.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "pinia": "^2.0.22",
+    "postcss-html": "^1.5.0",
+    "postcss-preset-env": "^7.8.1",
+    "postcss-px-to-viewport": "^1.1.1",
+    "prettier": "^2.7.1",
+    "stylelint": "^14.11.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-recommended-vue": "^1.4.0",
+    "stylelint-config-standard": "^28.0.0",
+    "stylelint-config-standard-scss": "^5.0.0",
+    "stylelint-order": "^5.0.0",
+    "vite": "^3.1.0",
+    "vue": "^3.2.39",
+    "vue-router": "^4.1.5"
+  },
+  "peerDependencies": {
+    "ant-design-vue": ">=3.2.10",
+    "vue": ">=3.1.0"
+  }
+}
