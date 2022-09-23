@@ -9,15 +9,15 @@ export default defineComponent({
   },
   /** modelValue双向绑定 */
   emits: ['update:modelValue'],
-  setup(props, { emit }) {
-    const { modelValue, item } = toRefs(props)
+  setup(props, { attrs, emit }) {
+    const { modelValue } = toRefs(props)
     const val = computed({
       get: () => modelValue,
       set: (v) => emit('update:modelValue', +v),
     })
     return () => (
       <div class="form-item-box form-checkbox-box">
-        <Checkbox v-model:checked={val.value}>{item.value.label}</Checkbox>
+        <Checkbox v-model={val.value} {...attrs}></Checkbox>
       </div>
     )
   },

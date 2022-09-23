@@ -1,10 +1,10 @@
 import { PropType } from 'vue'
-import { FormItem } from './type'
+import { YdFormCheckboxProps } from './type'
 
 export default {
   /** 表单项 */
   item: {
-    type: Object as PropType<FormItem>,
+    type: Object as PropType<YdFormCheckboxProps['item']>,
     default: () => ({}),
   },
   /** 绑定的值 */

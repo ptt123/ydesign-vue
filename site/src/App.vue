@@ -1,13 +1,32 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { FormItem } from '../../src/form-checkbox/type'
-const formItem = { label: '这是复选框', key: 'isStart' } as FormItem
-const modelValue = ref(true)
+const inputValue = ref('')
+const inputItem = {
+  disabled: true,
+  placeholder: '这是一个input框',
+}
+const textareaValue = ref('')
+
+const datePickerValue = ref('')
+
+const rangePickerValue = ref([])
+const startTime = ''
+const endTime = ''
 </script>
 
 <template>
   <div>
-    fdsfdsu
-    <yd-form-checkbox :item="formItem" :modelValue="modelValue" />
+    <yd-form-input
+      v-model:modelValue="inputValue"
+      :disabled="inputItem.disabled"
+      :placeholder="inputItem.placeholder"
+    />
+    <yd-form-textarea v-model:modelValue="textareaValue" />
+    <yd-form-date-picker v-model:modelValue="datePickerValue" />
+    <yd-form-range-picker
+      v-model:modelValue="rangePickerValue"
+      v-model:startKey="startTime"
+      v-model:endKey="endTime"
+    />
   </div>
 </template>
