@@ -4,8 +4,10 @@ declare type FormItemType =
   | 'date-time-range-picker'
   | 'normal-select'
   | 'checkbox'
-  | 'upload'
+  | 'upload-img'
   | 'child-form'
+  | 'upload-audio'
+  | 'upload-file'
   | 'upload-video'
   | 'date-time-picker'
 

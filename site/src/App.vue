@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 const inputValue = ref('')
 const inputItem = {
   disabled: true,
@@ -12,6 +12,16 @@ const datePickerValue = ref('')
 const rangePickerValue = ref([])
 const startTime = ''
 const endTime = ''
+const fileList = ref([
+  'https://applet-down.jxbscbd.com/vip/scan-code/img1.png',
+  'https://applet-down.jxbscbd.com/vip/scan-code/img2.png',
+  'https://applet-down.jxbscbd.com/vip/scan-code/img3.png',
+  'https://applet-down.jxbscbd.com/vip/scan-code/img4.png',
+])
+const videoList = ref([])
+watchEffect(() => {
+  console.log('fileList', fileList.value)
+})
 </script>
 
 <template>
@@ -28,5 +38,8 @@ const endTime = ''
       v-model:startKey="startTime"
       v-model:endKey="endTime"
     />
+    <!-- <upload dir="xiaoye-test" v-model:fileList="fileList" /> -->
+    <yd-form-upload-img dir="xiaoye-test" v-model:fileList="fileList" />
+    <yd-form-upload-video dir="xiaoye-test" v-model:fileList="videoList" />
   </div>
 </template>
