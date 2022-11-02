@@ -1,15 +1,17 @@
 declare type FormItemType =
   | 'input'
   | 'textarea'
-  | 'date-time-range-picker'
-  | 'normal-select'
+  | 'datetime-picker'
+  | 'datetime-range-picker'
+  | 'select'
+  | 'select-remotely'
   | 'checkbox'
+  | 'checkbox-group'
   | 'upload-img'
   | 'child-form'
   | 'upload-audio'
   | 'upload-file'
   | 'upload-video'
-  | 'date-time-picker'
 
 declare interface FormItem {
   /** 表单项文本 */
@@ -27,7 +29,7 @@ declare interface FormItem {
   /** normal-select表单项的可选项 */
   options?: Array<SelectOption>
   /** 校验规则 */
-  rule?: FormRule
+  rule?: Array<FormRule>
   /** 子表title及新增按钮文案 */
   headerLabel?: string
   /** 子表是否可删除 */
@@ -41,11 +43,24 @@ declare interface FormItem {
   /** 子表 */
   childrenForm?: Array<FormItem>
   /** select框属性 可搜索 */
-  filterable: boolean
+  filterable?: boolean
   /** select框属性 可多选 */
-  multiple: boolean
+  multiple?: boolean
   /** 默认值 */
-  defaultValue: any
+  defaultValue?: any
+  /** 关联的表单项key */
+  linkKey?: string
+  /** 管理的表单项value */
+  linkValue?: string | number | any[]
+  colSpan?: number
+  /** labelCol {span: 3, offset: 12}*/
+  labelColSpan?: number
+  labelColOffset?: number
+  /** wrapperCol {span: 3, offset: 12}*/
+  wrapperColSpan?: number
+  wrapperColOffset?: number
+  /** 其他任意字段 */
+  [key: string]: any
 }
 
 declare type SelectOption = {
@@ -55,7 +70,7 @@ declare type SelectOption = {
   bindData?: Record<string, any>
 }
 
-export interface FormRule {
+declare interface FormRule {
   /** 是否必填 */
   required?: boolean
   /** 错误消息 */
@@ -72,18 +87,23 @@ export interface FormRule {
   transform?: Transform
 }
 
-export type CustomValidator = (
+declare type CustomValidator = (
   rule: any,
   value: any,
   callback: any,
 ) => CustomValidateResolveType | Promise<CustomValidateResolveType>
 
-export type CustomValidateResolveType = boolean | CustomValidateObj
+declare type CustomValidateResolveType = boolean | CustomValidateObj
 
-export interface CustomValidateObj {
+declare interface CustomValidateObj {
   result: boolean
   message: string
   type?: 'error' | 'warning' | 'success'
 }
 
-export type Transform = (value: any) => any
+declare type Transform = (value: any) => any
+
+declare interface FormConfig {
+  label: string // 表单分块名称
+  children: Array<FormItem> // 表单中的form-item
+}

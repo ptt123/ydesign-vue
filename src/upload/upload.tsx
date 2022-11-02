@@ -29,12 +29,12 @@ export default defineComponent({
      * @returns
      */
     const validate = (file: File): boolean => {
-      const { size, type } = file
+      const { size, name } = file
       if (size / 1024 > maxSize.value) {
         console.log(`上传文件的大小限制在${maxSize}KB内`)
         return false
       }
-      if (fileType.value !== '*' && fileType.value.indexOf(type.split('/')[1]) < 0) {
+      if (fileType.value !== '*' && fileType.value.indexOf(name.split('.')[1]) < 0) {
         console.log(`只支持上传${fileType.toString()}格式的文件`)
         return false
       }
@@ -46,7 +46,6 @@ export default defineComponent({
      * @param file
      */
     const upload = (file: File) => {
-      debugger
       try {
         const nameList = file.name.split('.')
         const ext = nameList[nameList.length - 1]

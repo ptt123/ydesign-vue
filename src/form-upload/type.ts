@@ -1,5 +1,3 @@
-import { FormItem } from '../global'
-
 export interface YdFormUploadProps {
   uploadImgItem: FormItem & {
     type: 'upload-img'

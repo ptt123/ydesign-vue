@@ -1,5 +1,3 @@
-import { FormItem, SelectOption } from '../global'
-
 export interface YdFormCheckboxProps {
   /** 表单项 */
   item: FormItem

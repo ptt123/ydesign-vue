@@ -12,12 +12,12 @@ export default defineComponent({
   setup(props, { attrs, emit }) {
     const { modelValue } = toRefs(props)
     const val = computed({
-      get: () => modelValue,
-      set: (v) => emit('update:modelValue', +v),
+      get: () => modelValue.value,
+      set: (v) => emit('update:modelValue', +v!),
     })
     return () => (
       <div class="form-item-box form-checkbox-box">
-        <Checkbox v-model={val.value} {...attrs}></Checkbox>
+        <Checkbox v-model:checked={val.value} {...attrs}></Checkbox>
       </div>
     )
   },
