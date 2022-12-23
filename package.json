@@ -2,7 +2,7 @@
   "name": "ydesign-vue",
   "version": "1.0.0",
   "description": "YDesign Component for vue",
-  "main": "lib/index-lib.js",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ptt123/ydesign-vue.git"
@@ -11,11 +11,12 @@
   "bugs": {
     "url": "https://github.com/ptt123/ydesign-vue/issues"
   },
+  "author": "ydesign",
+  "license": "MIT",
   "scripts": {
-    "start": "npm run dev",
-    "dev": "cd site && vite",
-    "site:build": "cd site && vite build --debug",
-    "test": "npm run test:unit && npm run test:node",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "lint:check": "eslint .",
@@ -30,31 +31,31 @@
     }
   },
   "keywords": [
-    "vue",
-    "vue3",
-    "ydesign",
-    "typescript"
+    "vue2",
+    "ydesign"
   ],
-  "author": "ydesign",
-  "license": "MIT",
+  "dependencies": {
+    "core-js": "^3.8.3",
+    "vue": "^2.6.0"
+  },
   "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
-    "@typescript-eslint/eslint-plugin": "^5.37.0",
-    "@typescript-eslint/parser": "^5.37.0",
-    "@vitejs/plugin-vue": "^3.1.0",
-    "@vitejs/plugin-vue-jsx": "^2.0.1",
-    "ant-design-vue": "^3.2.12",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "ant-design-vue": "^1.7.8",
     "commitizen": "^4.2.5",
-    "eslint": "^8.23.1",
+    "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-vue": "^9.4.0",
+    "eslint-plugin-vue": "^8.0.3",
     "husky": "^8.0.1",
     "less": "^4.1.3",
+    "less-loader": "^11.1.0",
     "lint-staged": "^13.0.3",
-    "pinia": "^2.0.22",
-    "postcss-html": "^1.5.0",
     "postcss-preset-env": "^7.8.1",
     "postcss-px-to-viewport": "^1.1.1",
     "prettier": "^2.7.1",
@@ -64,14 +65,26 @@
     "stylelint-config-standard": "^28.0.0",
     "stylelint-config-standard-scss": "^5.0.0",
     "stylelint-order": "^5.0.0",
-    "vite": "^3.1.0",
-    "vue": "^3.2.39",
-    "vue-router": "^4.1.5"
+    "vue-template-compiler": "^2.6.14"
   },
   "peerDependencies": {
     "ali-oss": "^6.17.1",
-    "ant-design-vue": ">=3.2.10",
-    "vue": ">=3.1.0",
-    "lodash": "^4.17.21"
+    "ant-design-vue": "^1.7.8",
+    "lodash": "^4.17.21",
+    "vue": "^2.6.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
   }
 }
