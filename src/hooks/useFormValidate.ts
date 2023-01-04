@@ -24,9 +24,7 @@ export const useFormValidate = (formArr: Array<FormItem>) => {
       .then(async () => {
         return true
       })
-      .catch((error: Error) => {
-        console.log('error', error)
-      })
+      .catch(() => {})
   }
 
   return {

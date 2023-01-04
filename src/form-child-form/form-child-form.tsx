@@ -1,4 +1,4 @@
-import { defineComponent, toRefs, computed, ref, watchEffect } from 'vue'
+import { defineComponent, toRefs, computed, ref } from 'vue'
 import { FormTextarea, FormInput } from '../form-input'
 import { FormCheckbox, FormCheckboxGroup } from '../form-checkbox'
 import { FormDatePicker, FormRangePicker } from '../form-date-picker'
@@ -110,11 +110,6 @@ export default defineComponent({
       }
     }
 
-    watchEffect(() => {
-      childFormFileds.value = []
-      initChildFormFileds()
-    })
-
     // 删除一个子表单
     const deleteChildForm = (index: number) => {
       // 更新childFormFileds
@@ -131,8 +126,7 @@ export default defineComponent({
         .then((valid: boolean) => {
           return valid
         })
-        .catch((err: Error) => {
-          console.log('formValidate error', err)
+        .catch(() => {
           return false
         })
     }
@@ -144,13 +138,14 @@ export default defineComponent({
         .then((res) => {
           return !res.includes(false || undefined)
         })
-        .catch((err: Error) => {
-          console.log('error', err)
+        .catch(() => {
           return false
         })
     }
 
     expose({ childFormValidate })
+
+    initChildFormFileds()
 
     /**
      * 渲染表单项

@@ -3,7 +3,24 @@ import { ref } from 'vue'
 import { Button } from 'ant-design-vue'
 import { YdProFormProps } from '../../src/index'
 const formData = ref({
-  childForm: [],
+  childForm: [
+    {
+      testInput: '',
+      testselect: '',
+      testselectRemotely: '',
+      testtextarea: '',
+      checkbox: false,
+      checkboxGroup: [],
+      img: [],
+      audio: [],
+      file: [],
+      video: [],
+      dateTime: '',
+      dateTimeRange: [],
+      startTime: '',
+      endTime: '',
+    },
+  ],
   testInput: '',
   testselect: '',
   testselectRemotely: '',
@@ -128,13 +145,13 @@ const formConfig: YdProFormProps['formConfig'] = [
         childrenForm: [
           {
             label: '测试输入框',
-            key: 'testInput1',
+            key: 'testInput',
             type: 'input',
             rule: [{ required: true, message: '请输入', trigger: 'blur' }],
           },
           {
             label: '测试选择框',
-            key: 'testselect1',
+            key: 'testselect',
             type: 'select',
             options: [
               {
@@ -149,7 +166,7 @@ const formConfig: YdProFormProps['formConfig'] = [
           },
           {
             label: '远程选择框',
-            key: 'testselectRemotely1',
+            key: 'testselectRemotely',
             type: 'select',
             options: [
               {
@@ -165,7 +182,7 @@ const formConfig: YdProFormProps['formConfig'] = [
           {
             label: '多行文本框',
             type: 'textarea',
-            key: 'testtextarea1',
+            key: 'testtextarea',
           },
           {
             label: '复选框',
@@ -175,7 +192,7 @@ const formConfig: YdProFormProps['formConfig'] = [
           {
             label: '复选框组',
             type: 'checkbox-group',
-            key: 'checkboxGroup1',
+            key: 'checkboxGroup',
             options: [
               {
                 label: '爪哇',
@@ -190,34 +207,34 @@ const formConfig: YdProFormProps['formConfig'] = [
           {
             label: '上传图片',
             type: 'upload-img',
-            key: 'img1',
+            key: 'img',
           },
           {
             label: '上传音频',
             type: 'upload-audio',
-            key: 'audio1',
+            key: 'audio',
           },
           {
             label: '上传文件',
             type: 'upload-file',
-            key: 'file1',
+            key: 'file',
           },
           {
             label: '上传视频',
             type: 'upload-video',
-            key: 'video1',
+            key: 'video',
           },
           {
             label: '世间选择器',
             type: 'datetime-picker',
-            key: 'dateTime1',
+            key: 'dateTime',
           },
           {
             label: '时间范围选择',
             type: 'datetime-range-picker',
-            key: 'dateTimeRange1',
-            startKey: 'startTime1',
-            endKey: 'endTime1',
+            key: 'dateTimeRange',
+            startKey: 'startTime',
+            endKey: 'endTime',
           },
         ],
       },
