@@ -2,7 +2,17 @@
   "name": "ydesign-vue",
   "version": "1.0.0",
   "description": "YDesign Component for vue",
-  "private": true,
+  "main": "dist/index.umd.js",
+  "keywords": [
+    "ydesign-vue",
+    "vue2",
+    "form-pro"
+  ],
+  "author": "ptt123",
+  "files": [
+    "dist",
+    "UI"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ptt123/ydesign-vue.git"
@@ -11,11 +21,11 @@
   "bugs": {
     "url": "https://github.com/ptt123/ydesign-vue/issues"
   },
-  "author": "ydesign",
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "npm run build:js",
+    "build:js": "webpack --config ./webpack.component.js",
     "lint": "vue-cli-service lint",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
@@ -30,13 +40,10 @@
       "path": "node_modules/cz-conventional-changelog"
     }
   },
-  "keywords": [
-    "vue2",
-    "ydesign"
-  ],
   "dependencies": {
+    "@vue/composition-api": "^1.7.1",
     "core-js": "^3.8.3",
-    "vue": "^2.6.0"
+    "vue": "^2.6.14"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -52,6 +59,9 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^8.0.3",
+    "gulp": "^4.0.2",
+    "gulp-less": "^5.0.0",
+    "gulp-minify-css": "^1.2.4",
     "husky": "^8.0.1",
     "less": "^4.1.3",
     "less-loader": "^11.1.0",
@@ -65,13 +75,14 @@
     "stylelint-config-standard": "^28.0.0",
     "stylelint-config-standard-scss": "^5.0.0",
     "stylelint-order": "^5.0.0",
-    "vue-template-compiler": "^2.6.14"
+    "vue-loader": "^15.10.1",
+    "vue-template-compiler": "^2.6.14",
+    "webpack-cli": "^5.0.1"
   },
   "peerDependencies": {
     "ali-oss": "^6.17.1",
     "ant-design-vue": "^1.7.8",
-    "lodash": "^4.17.21",
-    "vue": "^2.6.0"
+    "lodash": "^4.17.21"
   },
   "eslintConfig": {
     "root": true,

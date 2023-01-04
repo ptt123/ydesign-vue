@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-import '../UI/css/test.less'
-import Test from '../UI/packages/test/index'
-Vue.use(Test)
+import '../UI/css/index.less'
+import Ydesign from '../UI/packages/index'
+Vue.use(Ydesign)
 
 Vue.config.productionTip = false
 
