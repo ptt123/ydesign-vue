@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import { Input } from 'ant-design-vue'
+// import { Input } from 'ant-design-vue'
 export default {
   name: 'YdInput',
-  components: { Input },
+  // components: { Input },
   props: {
     modelValue: {
       type: String,

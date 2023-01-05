@@ -26,6 +26,7 @@
     "serve": "vue-cli-service serve",
     "build": "npm run build:js",
     "build:js": "webpack --config ./webpack.component.js",
+    "lib": "vue-cli-service build --target lib --dest dist ./UI/packages/index.js",
     "lint": "vue-cli-service lint",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",

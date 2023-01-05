@@ -194,3 +194,7 @@ export default defineComponent({
   },
 })
 </script>
+
+<style scoped lang="less">
+@import '../../css/proForm.less';
+</style>

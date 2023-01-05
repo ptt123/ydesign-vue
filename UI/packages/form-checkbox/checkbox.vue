@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import { Checkbox } from 'ant-design-vue'
+// import { Checkbox } from 'ant-design-vue'
 export default {
   name: 'YdCheckbox',
-  components: { Checkbox },
+  // components: { Checkbox },
   props: {
     modelValue: {
       type: Boolean,

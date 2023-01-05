@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import { Select } from 'ant-design-vue'
+// import { Select } from 'ant-design-vue'
 export default {
   name: 'YdSelect',
-  components: { Select },
+  // components: { Select },
   props: {
     modelValue: {
       type: [String, Number, Array],

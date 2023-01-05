@@ -168,3 +168,7 @@ export default {
   },
 }
 </script>
+
+<style lang="less" scoped>
+@import '../../css/upload.less';
+</style>

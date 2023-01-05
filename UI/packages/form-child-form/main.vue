@@ -128,7 +128,7 @@
 
 <script>
 import { defineComponent, ref, computed, reactive, toRefs } from '@vue/composition-api'
-import { FormModel, Row, Col } from 'ant-design-vue'
+// import { FormModel, Row, Col } from 'ant-design-vue'
 import YdInput from '../form-input/input.vue'
 import YdTextarea from '../form-input/textarea.vue'
 import YdCheckbox from '../form-checkbox/checkbox.vue'
@@ -146,10 +146,10 @@ import { useFormValidate } from '../hooks/index'
 export default defineComponent({
   name: 'YdChildForm',
   components: {
-    FormModel,
-    FormModelItem: FormModel.Item,
-    Row,
-    Col,
+    // FormModel,
+    // FormModelItem: FormModel.Item,
+    // Row,
+    // Col,
     YdInput,
     YdTextarea,
     YdCheckbox,
@@ -300,3 +300,7 @@ export default defineComponent({
   },
 })
 </script>
+
+<style scoped lang="less">
+@import '../../css/childForm.less';
+</style>
