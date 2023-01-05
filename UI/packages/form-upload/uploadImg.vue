@@ -1,6 +1,6 @@
 <template>
   <div class="form-item-box form-upload-box">
-    <Upload v-model="val" v-bind="$attrs" />
+    <Upload v-model="val" v-bind="$attrs" v-on="$listeners" />
   </div>
 </template>
 

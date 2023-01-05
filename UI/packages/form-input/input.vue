@@ -1,6 +1,6 @@
 <template>
   <div class="form-item-box form-input-box">
-    <Input v-model="val" v-bind="$attrs" />
+    <Input v-model="val" v-bind="$attrs" v-on="$listeners" />
   </div>
 </template>
 

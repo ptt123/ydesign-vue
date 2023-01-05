@@ -1,6 +1,6 @@
 <template>
   <div class="form-item-box form-select-box">
-    <Select v-model="val" :options="options" v-bind="$attrs" />
+    <Select v-model="val" :options="options" v-bind="$attrs" v-on="$listeners" allowClear />
   </div>
 </template>
 

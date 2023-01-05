@@ -1,6 +1,6 @@
 <template>
   <div class="form-item-box form-checkbox-box">
-    <Checkbox v-model="val" v-bind="$attrs" />
+    <Checkbox v-model="val" v-bind="$attrs" v-on="$listeners" />
   </div>
 </template>
 

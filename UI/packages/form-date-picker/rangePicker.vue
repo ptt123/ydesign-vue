@@ -4,6 +4,7 @@
       v-model="val"
       v-bind="$attrs"
       @change="onChange"
+      v-on="$listeners"
       valueFormat="YYYY-MM-DD HH:mm:ss"
     />
   </div>

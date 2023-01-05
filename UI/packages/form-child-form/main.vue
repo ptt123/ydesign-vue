@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="child-form-body">
-        <Form
+        <FormModel
           :label-col="{ span: 4 }"
           :wrapper-col="{ span: 24 }"
           :ref="'listFormRefs' + item.key"
@@ -25,11 +25,11 @@
                 :span="citem.colSpan || 12"
                 v-if="!citem.linkKey || citem.linkValue === current[index][citem.linkKey]"
               >
-                <FormItem
+                <FormModelItem
                   :label-col="{ span: citem.labelColSpan || 6 }"
                   :label="citem.label"
                   :wrapper-col="{ span: citem.wrapperColSpan || 12 }"
-                  :name="citem.key"
+                  :prop="citem.key"
                 >
                   <label slot="label">
                     {{ citem.label }}
@@ -40,73 +40,84 @@
                     :readOnly="citem.readOnly || false"
                     :disabled="citem.disabled || false"
                     :max-length="citem.maxlength"
+                    :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
                   />
                   <YdTextarea
                     v-if="citem.type === 'textarea'"
                     :disabled="citem.disabled || false"
+                    :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
                   />
                   <YdCheckbox
                     v-if="citem.type === 'checkbox'"
                     :disabled="citem.disabled || false"
+                    :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
                   />
                   <YdSelect
                     v-if="citem.type === 'select'"
                     :options="citem.options"
                     :disabled="citem.disabled || false"
+                    :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
                   />
                   <YdRemotelySelect
                     v-if="citem.type === 'select-remotely'"
                     :options="citem.options"
                     :disabled="citem.disabled || false"
+                    :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
                   />
                   <YdUploadImg
                     v-if="citem.type === 'upload-img'"
                     :disabled="citem.disabled || false"
+                    :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
                   />
                   <YdUploadAudio
                     v-if="citem.type === 'upload-audio'"
                     :disabled="citem.disabled || false"
+                    :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
                   />
                   <YdUploadFile
                     v-if="citem.type === 'upload-file'"
                     :disabled="citem.disabled || false"
+                    :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
                   />
                   <YdUploadVideo
                     v-if="citem.type === 'upload-video'"
                     :disabled="citem.disabled || false"
+                    :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
                   />
                   <YdDatePicker
                     v-if="citem.type === 'datetime-picker'"
                     :disabled="citem.disabled || false"
+                    :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
                   />
                   <YdRangePicker
                     v-if="citem.type === 'datetime-range-picker'"
                     :disabled="citem.disabled || false"
+                    :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
                     v-bind:startKey.sync="current[index][citem.startKey]"
                     v-bind:endKey.sync="current[index][citem.endKey]"
                   />
                   <YdChildForm
                     :item="citem"
-                    :modelValue="formData[item.key]"
+                    :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
                     v-else-if="citem.type === 'child-form'"
                   />
-                </FormItem>
+                </FormModelItem>
               </Col>
             </template>
           </Row>
-        </Form>
+        </FormModel>
       </div>
     </div>
     <div v-if="addBtnVisible" class="child-form-add-btn" @click="addChildForm">
@@ -117,7 +128,7 @@
 
 <script>
 import { defineComponent, ref, computed, reactive, toRefs } from '@vue/composition-api'
-import { Form, Row, Col } from 'ant-design-vue'
+import { FormModel, Row, Col } from 'ant-design-vue'
 import YdInput from '../form-input/input.vue'
 import YdTextarea from '../form-input/textarea.vue'
 import YdCheckbox from '../form-checkbox/checkbox.vue'
@@ -135,8 +146,8 @@ import { useFormValidate } from '../hooks/index'
 export default defineComponent({
   name: 'YdChildForm',
   components: {
-    Form,
-    FormItem: Form.Item,
+    FormModel,
+    FormModelItem: FormModel.Item,
     Row,
     Col,
     YdInput,
@@ -167,7 +178,7 @@ export default defineComponent({
     // 最好不要直接更改propszheli
     let current = computed(() => modelValue.value)
     let childFormFileds = ref([])
-    const listFormRefs = reactive({})
+    const listFormRefs = reactive([])
     const { rules } = useFormValidate(item.value.childrenForm)
 
     let initModelValue = {}
@@ -259,7 +270,9 @@ export default defineComponent({
 
     // 所有子表单校验
     const childFormValidate = async () => {
-      const arrValidateResults = listFormRefs.value.map((formRef) => formValidate(formRef))
+      const arrValidateResults = Object.values(listFormRefs).map((formRef) => {
+        formRef.value ? formRef.value.map((val) => formValidate(val)) : [Promise.resolve(true)]
+      })
       return Promise.all(arrValidateResults)
         .then((res) => {
           return !res.includes(false || undefined)
@@ -271,6 +284,7 @@ export default defineComponent({
     }
 
     initChildFormFileds()
+    listFormRefs[`listFormRefs${item.value.key}`] = ref()
 
     return {
       addBtnLabel,

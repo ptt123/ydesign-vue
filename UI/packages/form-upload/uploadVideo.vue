@@ -1,6 +1,12 @@
 <template>
   <div class="form-item-box form-upload-box">
-    <Upload v-model="val" v-bind="$attrs" :maxSize="1024000" :fileType="['mp4']" />
+    <Upload
+      v-model="val"
+      v-bind="$attrs"
+      v-on="$listeners"
+      :maxSize="1024000"
+      :fileType="['mp4']"
+    />
   </div>
 </template>
 

@@ -1,16 +1,20 @@
 <template>
   <div id="app">
-    <YdForm :formData="formData" :formConfig="formConfig" />
+    <YdForm :formData="formData" :formConfig="formConfig" ref="formCompRef" />
+    <Button @click="onSubmit">submit</Button>
   </div>
 </template>
 
 <script>
+import { Button } from 'ant-design-vue'
 export default {
   name: 'App',
+  components: { Button },
   data() {
     return {
       formData: {
         childForm: [],
+        childForm1: [],
         testInput: '',
         testselect: '',
         testselectRemotely: '',
@@ -50,6 +54,7 @@ export default {
                   value: 2,
                 },
               ],
+              rule: [{ required: true, message: '请选择', trigger: 'change' }],
             },
             {
               label: '远程选择框',
@@ -70,6 +75,7 @@ export default {
               label: '多行文本框',
               type: 'textarea',
               key: 'testtextarea',
+              rule: [{ required: true, message: '请输入', trigger: 'blur' }],
             },
             {
               label: '复选框',
@@ -198,10 +204,105 @@ export default {
                 },
               ],
             },
+            {
+              headerLabel: '子表单1',
+              addEnable: true,
+              deleteEnable: true,
+              addMaxLength: 10,
+              key: 'childForm1',
+              type: 'child-form',
+              colSpan: 24,
+              wrapperColSpan: 24,
+              childrenForm: [
+                {
+                  label: '测试输入框',
+                  key: 'testInput1',
+                  type: 'input',
+                  rule: [{ required: true, message: '请输入', trigger: 'blur' }],
+                },
+                {
+                  label: '测试选择框',
+                  key: 'testselect1',
+                  type: 'select',
+                  options: [
+                    {
+                      label: '1',
+                      value: 1,
+                    },
+                    {
+                      label: '2',
+                      value: 2,
+                    },
+                  ],
+                },
+                {
+                  label: '远程选择框',
+                  key: 'testselectRemotely1',
+                  type: 'select',
+                  options: [
+                    {
+                      label: '1',
+                      value: 1,
+                    },
+                    {
+                      label: '2',
+                      value: 2,
+                    },
+                  ],
+                },
+                {
+                  label: '多行文本框',
+                  type: 'textarea',
+                  key: 'testtextarea1',
+                },
+                {
+                  label: '复选框',
+                  type: 'checkbox',
+                  key: 'checkbox',
+                },
+                {
+                  label: '上传图片',
+                  type: 'upload-img',
+                  key: 'img1',
+                },
+                {
+                  label: '上传音频',
+                  type: 'upload-audio',
+                  key: 'audio1',
+                },
+                {
+                  label: '上传文件',
+                  type: 'upload-file',
+                  key: 'file1',
+                },
+                {
+                  label: '上传视频',
+                  type: 'upload-video',
+                  key: 'video1',
+                },
+                {
+                  label: '世间选择器',
+                  type: 'datetime-picker',
+                  key: 'dateTime1',
+                },
+                {
+                  label: '时间范围选择',
+                  type: 'datetime-range-picker',
+                  key: 'dateTimeRange1',
+                  startKey: 'startTime1',
+                  endKey: 'endTime1',
+                },
+              ],
+            },
           ],
         },
       ],
     }
+  },
+  methods: {
+    onSubmit() {
+      this.$refs['formCompRef'].validate()
+    },
   },
 }
 </script>

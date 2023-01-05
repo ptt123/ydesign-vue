@@ -1,5 +1,5 @@
 <template>
-  <Form
+  <FormModel
     :label-col="{ span: 4 }"
     :wraper-col="{ span: 16 }"
     ref="formRef"
@@ -15,11 +15,11 @@
             :span="item.colSpan || 12"
             v-if="!item.linkKey || item.linkValue === formData.value[item.linkKey]"
           >
-            <FormItem
+            <FormModelItem
               :label-col="{ span: item.labelColSpan || 6 }"
               :label="item.label"
               :wrapper-col="{ span: item.wrapperColSpan || 12 }"
-              :name="item.key"
+              :prop="item.key"
             >
               <label slot="label" v-if="item.label">
                 <label v-if="item.type == 'child-form'" class="child-form-title">{{
@@ -33,11 +33,13 @@
                 :readOnly="item.readOnly || false"
                 :disabled="item.disabled || false"
                 :max-length="item.maxlength"
+                :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
               />
               <YdTextarea
                 v-if="item.type === 'textarea'"
                 :disabled="item.disabled || false"
+                :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
               />
               <YdCheckbox
@@ -50,42 +52,50 @@
                 v-if="item.type === 'select'"
                 :options="item.options"
                 :disabled="item.disabled || false"
+                :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
               />
               <YdRemotelySelect
                 v-if="item.type === 'select-remotely'"
                 :options="item.options"
                 :disabled="item.disabled || false"
+                :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
               />
               <YdUploadImg
                 v-if="item.type === 'upload-img'"
                 :disabled="item.disabled || false"
+                :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
               />
               <YdUploadAudio
                 v-if="item.type === 'upload-audio'"
                 :disabled="item.disabled || false"
+                :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
               />
               <YdUploadFile
                 v-if="item.type === 'upload-file'"
                 :disabled="item.disabled || false"
+                :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
               />
               <YdUploadVideo
                 v-if="item.type === 'upload-video'"
                 :disabled="item.disabled || false"
+                :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
               />
               <YdDatePicker
                 v-if="item.type === 'datetime-picker'"
                 :disabled="item.disabled || false"
+                :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
               />
               <YdRangePicker
                 v-if="item.type === 'datetime-range-picker'"
                 :disabled="item.disabled || false"
+                :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
                 v-bind:startKey.sync="formData[item.startKey]"
                 v-bind:endKey.sync="formData[item.endKey]"
@@ -97,16 +107,16 @@
                 v-model="formData[item.key]"
                 v-else-if="item.type === 'child-form'"
               />
-            </FormItem>
+            </FormModelItem>
           </Col>
         </template>
       </Row>
     </div>
-  </Form>
+  </FormModel>
 </template>
 
 <script>
-import { Form, Row, Col } from 'ant-design-vue'
+import { FormModel, Row, Col } from 'ant-design-vue'
 import { defineComponent, ref, toRefs, reactive } from '@vue/composition-api'
 import YdInput from '../form-input/input.vue'
 import YdTextarea from '../form-input/textarea.vue'
@@ -124,8 +134,8 @@ import { useFormValidate } from '../hooks'
 export default defineComponent({
   name: 'YdForm',
   components: {
-    Form,
-    FormItem: Form.Item,
+    FormModel,
+    FormModelItem: FormModel.Item,
     Row,
     Col,
     YdInput,
@@ -158,15 +168,19 @@ export default defineComponent({
     const formItemArr = props.formConfig.map((val) => val.children).flat()
 
     formItemArr.forEach((item) => {
-      objFormChildCompRefs[`childFormRef` + item.key] = ref()
+      if (item.type == 'child-form') {
+        objFormChildCompRefs[`childFormRef` + item.key] = ref()
+      }
     })
 
     const { rules, formRef, formValidate } = useFormValidate(formItemArr)
 
     // 表单校验
     const validate = async () => {
-      const arrFormChildCompRefs = Object.values(objFormChildCompRefs)
-      const promiseAllArr = arrFormChildCompRefs.map((formRef) => formRef.childFormValidate())
+      const arrFormChildCompRefs = Object.values(objFormChildCompRefs).map((val) => val.value)
+      const promiseAllArr = arrFormChildCompRefs.map((formRef) => {
+        formRef[0].childFormValidate()
+      })
       return Promise.all([...promiseAllArr, formValidate()]).then((res) => {
         return !res.includes(false || undefined)
       })

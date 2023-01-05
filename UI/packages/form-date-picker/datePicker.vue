@@ -1,6 +1,6 @@
 <template>
   <div class="form-item-box form-date-picker-box">
-    <DatePicker v-model="val" v-bind="$attrs" valueFormat="YYYY-MM-DD HH:mm:ss" />
+    <DatePicker v-model="val" v-bind="$attrs" v-on="$listeners" valueFormat="YYYY-MM-DD HH:mm:ss" />
   </div>
 </template>
 
