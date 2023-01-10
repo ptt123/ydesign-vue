@@ -29,39 +29,20 @@
                 <label v-else>{{ item.label }}</label>
                 <label class="blue-primary-color">{{ item.desc }}</label>
               </label>
-              <YdInput
+              <Input
                 v-if="item.type === 'input'"
                 :readOnly="item.readOnly || false"
                 :disabled="item.disabled || false"
                 :max-length="item.maxlength"
-                :modelValue="formData[item.key]"
+                :placeholder="item.placeholder"
                 v-model="formData[item.key]"
-                @blur="
-                  () => {
-                    $refs[item.key][0].onFieldBlur()
-                  }
-                "
-                @change="
-                  () => {
-                    $refs[item.key][0].onFieldChange()
-                  }
-                "
               />
-              <YdTextarea
+              <Input
+                type="textarea"
                 v-if="item.type === 'textarea'"
                 :disabled="item.disabled || false"
-                :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
-                @blur="
-                  () => {
-                    $refs[item.key][0].onFieldBlur()
-                  }
-                "
-                @change="
-                  () => {
-                    $refs[item.key][0].onFieldChange()
-                  }
-                "
+                auto-size
               />
               <YdCheckbox
                 v-if="item.type === 'checkbox'"
@@ -227,8 +208,6 @@
 </template>
 
 <script>
-import YdInput from '../form-input/input.vue'
-import YdTextarea from '../form-input/textarea.vue'
 import YdCheckbox from '../form-checkbox/checkbox.vue'
 import YdSelect from '../form-select/select.vue'
 import YdRemotelySelect from '../form-select/remotelySelect.vue'
@@ -244,8 +223,6 @@ export default {
   name: 'YdForm',
   mixins: [FormValidateMixin],
   components: {
-    YdInput,
-    YdTextarea,
     YdCheckbox,
     YdSelect,
     YdRemotelySelect,

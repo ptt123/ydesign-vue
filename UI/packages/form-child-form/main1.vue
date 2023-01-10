@@ -36,39 +36,19 @@
                     {{ citem.label }}
                     <label class="blue-primary-color">{{ citem.desc }}</label>
                   </label>
-                  <YdInput
+                  <Input
                     v-if="citem.type === 'input'"
                     :readOnly="citem.readOnly || false"
                     :disabled="citem.disabled || false"
                     :max-length="citem.maxlength"
-                    :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
-                    @blur="
-                      () => {
-                        $refs[citem.key][0].onFieldBlur()
-                      }
-                    "
-                    @change="
-                      () => {
-                        $refs[citem.key][0].onFieldChange()
-                      }
-                    "
                   />
-                  <YdTextarea
+                  <Input
+                    type="textarea"
                     v-if="citem.type === 'textarea'"
                     :disabled="citem.disabled || false"
-                    :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
-                    @blur="
-                      () => {
-                        $refs[citem.key][0].onFieldBlur()
-                      }
-                    "
-                    @change="
-                      () => {
-                        $refs[citem.key][0].onFieldChange()
-                      }
-                    "
+                    auto-size
                   />
                   <YdCheckbox
                     v-if="citem.type === 'checkbox'"
@@ -238,8 +218,6 @@
 </template>
 
 <script>
-import YdInput from '../form-input/input.vue'
-import YdTextarea from '../form-input/textarea.vue'
 import YdCheckbox from '../form-checkbox/checkbox.vue'
 import YdSelect from '../form-select/select.vue'
 import YdRemotelySelect from '../form-select/remotelySelect.vue'
@@ -255,8 +233,6 @@ export default {
   name: 'YdChildForm',
   mixins: [FormValidateMixin],
   components: {
-    YdInput,
-    YdTextarea,
     YdCheckbox,
     YdSelect,
     YdRemotelySelect,

@@ -4,11 +4,11 @@ import { Select, Input, Checkbox, DatePicker, FormModel, Row, Col } from 'ant-de
 import 'ant-design-vue/dist/antd.css'
 import OSS from 'ali-oss'
 
-import '../UI/css/index.less'
-import Ydesign from '../UI/packages/index'
+// import '../UI/css/index.less'
+// import Ydesign from '../UI/packages/index'
 
-// import Ydesign from '../dist/ydesign.umd.js'
-// import '../dist/ydesign.css'
+import Ydesign from '../dist/ydesign.umd.js'
+import '../dist/ydesign.css'
 
 // eslint-ignore
 Vue.component('Select', Select)

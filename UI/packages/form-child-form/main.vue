@@ -35,19 +35,19 @@
                     {{ citem.label }}
                     <label class="blue-primary-color">{{ citem.desc }}</label>
                   </label>
-                  <YdInput
+                  <Input
                     v-if="citem.type === 'input'"
                     :readOnly="citem.readOnly || false"
                     :disabled="citem.disabled || false"
                     :max-length="citem.maxlength"
-                    :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
                   />
-                  <YdTextarea
+                  <Input
+                    type="textarea"
                     v-if="citem.type === 'textarea'"
                     :disabled="citem.disabled || false"
-                    :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
+                    auto-size
                   />
                   <YdCheckbox
                     v-if="citem.type === 'checkbox'"
@@ -128,8 +128,6 @@
 
 <script>
 import { defineComponent, ref, computed, reactive, toRefs } from '@vue/composition-api'
-import YdInput from '../form-input/input.vue'
-import YdTextarea from '../form-input/textarea.vue'
 import YdCheckbox from '../form-checkbox/checkbox.vue'
 import YdSelect from '../form-select/select.vue'
 import YdRemotelySelect from '../form-select/remotelySelect.vue'
@@ -144,8 +142,6 @@ import { useFormValidate } from '../hooks/index'
 export default defineComponent({
   name: 'YdChildForm',
   components: {
-    YdInput,
-    YdTextarea,
     YdCheckbox,
     YdSelect,
     YdRemotelySelect,

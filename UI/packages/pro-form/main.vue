@@ -28,19 +28,20 @@
                 <label v-else>{{ item.label }}</label>
                 <label class="blue-primary-color">{{ item.desc }}</label>
               </label>
-              <YdInput
+              <Input
                 v-if="item.type === 'input'"
                 :readOnly="item.readOnly || false"
                 :disabled="item.disabled || false"
                 :max-length="item.maxlength"
-                :modelValue="formData[item.key]"
+                :placeholder="item.placeholder"
                 v-model="formData[item.key]"
               />
-              <YdTextarea
+              <Input
+                type="textarea"
                 v-if="item.type === 'textarea'"
                 :disabled="item.disabled || false"
-                :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
+                auto-size
               />
               <YdCheckbox
                 v-if="item.type === 'checkbox'"
@@ -117,8 +118,6 @@
 
 <script>
 import { defineComponent, ref, toRefs, reactive } from '@vue/composition-api'
-import YdInput from '../form-input/input.vue'
-import YdTextarea from '../form-input/textarea.vue'
 import YdCheckbox from '../form-checkbox/checkbox.vue'
 import YdSelect from '../form-select/select.vue'
 import YdRemotelySelect from '../form-select/remotelySelect.vue'
@@ -133,8 +132,6 @@ import { useFormValidate } from '../hooks'
 export default defineComponent({
   name: 'YdForm',
   components: {
-    YdInput,
-    YdTextarea,
     YdCheckbox,
     YdSelect,
     YdRemotelySelect,
