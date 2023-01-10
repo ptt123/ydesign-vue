@@ -8,10 +8,10 @@
       <div class="upload-img" v-if="isVideo()">
         <video :src="file" controls></video>
       </div>
-      <div class="upload-file" wx:if="isAudio()">
+      <div class="upload-file" v-elif="isAudio()">
         <audio :src="file" controls></audio>
       </div>
-      <div class="upload-file" wx:if="!isImg() && !isVideo() && !isAudio()">
+      <div class="upload-file" v-elif="!isImg() && !isVideo() && !isAudio()">
         <a :href="file">{{ file }}</a>
       </div>
     </div>
@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import OSS from 'ali-oss'
 let client
 export default {
   name: 'YdUpload',
@@ -102,7 +101,7 @@ export default {
     /** 获取阿里云OSS sts */
     getAliOss() {
       // 获取临时凭证
-      client = new OSS({
+      client = new this.$OSS({
         region: '你的region',
         accessKeyId: '你的accessKeyId',
         accessKeySecret: '你的accessKeySecret',

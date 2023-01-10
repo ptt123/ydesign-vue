@@ -5,10 +5,8 @@
 </template>
 
 <script>
-// import { Input } from 'ant-design-vue'
 export default {
   name: 'YdTextarea',
-  // components: { Input },
   props: {
     modelValue: {
       type: String,

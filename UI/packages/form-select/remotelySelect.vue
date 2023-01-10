@@ -1,14 +1,12 @@
 <template>
   <div class="form-item-box form-select-remotely-box">
-    <Select v-model="val" :options="options" v-bind="$attrs" @change="onChange" v-on="$listeners" />
+    <Select v-model="val" :options="options" v-bind="$attrs" @change="onChange" />
   </div>
 </template>
 
 <script>
-// import { Select } from 'ant-design-vue'
 export default {
   name: 'YdRemotelySelect',
-  // components: { Select },
   props: {
     modelValue: {
       type: [String, Number, Array],

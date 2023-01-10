@@ -2,7 +2,7 @@
   "name": "ydesign-vue",
   "version": "1.0.0",
   "description": "YDesign Component for vue",
-  "main": "dist/index.umd.js",
+  "main": "dist/ydesign-vue.js",
   "keywords": [
     "ydesign-vue",
     "vue2",
@@ -26,7 +26,7 @@
     "serve": "vue-cli-service serve",
     "build": "npm run build:js",
     "build:js": "webpack --config ./webpack.component.js",
-    "lib": "vue-cli-service build --target lib --dest dist ./UI/packages/index.js",
+    "lib": "vue-cli-service build --target lib --name ydesign ./UI/packages/index.js",
     "lint": "vue-cli-service lint",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
@@ -42,7 +42,6 @@
     }
   },
   "dependencies": {
-    "@vue/composition-api": "^1.7.1",
     "core-js": "^3.8.3",
     "vue": "^2.6.14"
   },
@@ -54,6 +53,8 @@
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "@vue/composition-api": "^1.7.1",
+    "ali-oss": "^6.17.1",
     "ant-design-vue": "^1.7.8",
     "commitizen": "^4.2.5",
     "eslint": "^7.32.0",
@@ -78,12 +79,8 @@
     "stylelint-order": "^5.0.0",
     "vue-loader": "^15.10.1",
     "vue-template-compiler": "^2.6.14",
+    "webpack-bundle-analyzer": "^4.7.0",
     "webpack-cli": "^5.0.1"
-  },
-  "peerDependencies": {
-    "ali-oss": "^6.17.1",
-    "ant-design-vue": "^1.7.8",
-    "lodash": "^4.17.21"
   },
   "eslintConfig": {
     "root": true,

@@ -116,7 +116,6 @@
 </template>
 
 <script>
-import { defineComponent, ref, toRefs, reactive } from '@vue/composition-api'
 import YdInput from '../form-input/input.vue'
 import YdTextarea from '../form-input/textarea.vue'
 import YdCheckbox from '../form-checkbox/checkbox.vue'
@@ -128,10 +127,11 @@ import YdUploadImg from '../form-upload/uploadImg.vue'
 import YdUploadAudio from '../form-upload/uploadAudio.vue'
 import YdUploadFile from '../form-upload/uploadFile.vue'
 import YdUploadVideo from '../form-upload/uploadVideo.vue'
-import YdChildForm from '../form-child-form/main.vue'
-import { useFormValidate } from '../hooks'
-export default defineComponent({
+import YdChildForm from '../form-child-form/main1.vue'
+import FormValidateMixin from '../mixins/useFormValidate1.js'
+export default {
   name: 'YdForm',
+  mixins: [FormValidateMixin],
   components: {
     YdInput,
     YdTextarea,
@@ -149,45 +149,45 @@ export default defineComponent({
   props: {
     formData: {
       type: Object,
-      default: () => ({}),
+      default() {
+        return {}
+      },
     },
     formConfig: {
       type: Array,
-      default: () => [],
+      default() {
+        return []
+      },
     },
   },
-
-  setup(props) {
-    const objFormChildCompRefs = reactive({})
-
-    const formItemArr = props.formConfig.map((val) => val.children).flat()
-
-    formItemArr.forEach((item) => {
-      if (item.type == 'child-form') {
-        objFormChildCompRefs[`childFormRef` + item.key] = ref()
-      }
-    })
-
-    const { rules, formRef, formValidate } = useFormValidate(formItemArr)
-
-    // 表单校验
-    const validate = async () => {
-      const arrFormChildCompRefs = Object.values(objFormChildCompRefs).map((val) => val.value)
-      const promiseAllArr = arrFormChildCompRefs.map((formRef) => {
-        formRef[0].childFormValidate()
-      })
-      return Promise.all([...promiseAllArr, formValidate()]).then((res) => {
-        return !res.includes(false || undefined)
-      })
-    }
+  data() {
     return {
-      rules,
-      formRef,
-      validate,
-      ...toRefs(objFormChildCompRefs),
+      objFormChildCompRefs: {},
+      rules: {},
     }
   },
-})
+  created() {
+    const formItemArr = this.formConfig.map((val) => val.children).flat()
+    this.rules = this.initFormRules(formItemArr)
+    formItemArr.forEach((item) => {
+      if (item.type == 'child-form') {
+        this.objFormChildCompRefs[`childFormRef` + item.key] = ''
+      }
+    })
+  },
+  methods: {
+    // 表单校验
+    async validate() {
+      const arrFormChildCompRefs = Object.keys(this.objFormChildCompRefs)
+      const promiseAllArr = arrFormChildCompRefs.map((formRefName) => {
+        return this.$refs[formRefName][0].childFormValidate()
+      })
+      return Promise.all([...promiseAllArr, this.formValidate(this.$refs.formRef)]).then((res) => {
+        return !res.includes(false || undefined)
+      })
+    },
+  },
+}
 </script>
 
 <style scoped lang="less">

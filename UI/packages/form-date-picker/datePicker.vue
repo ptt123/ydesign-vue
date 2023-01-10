@@ -5,12 +5,8 @@
 </template>
 
 <script>
-// import { DatePicker } from 'ant-design-vue'
 export default {
   name: 'YdDatePicker',
-  components: {
-    // DatePicker,
-  },
   props: {
     modelValue: {
       type: String,

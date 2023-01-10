@@ -1,2 +1,3 @@
 # .eslintignore 不需要检查的文件
 node_modules
+dist/

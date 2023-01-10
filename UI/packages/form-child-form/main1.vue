@@ -14,7 +14,7 @@
         <FormModel
           :label-col="{ span: 4 }"
           :wrapper-col="{ span: 24 }"
-          :ref="'listFormRefs' + item.key"
+          ref="listFormRefs"
           :rules="rules"
           :model="current[index]"
         >
@@ -127,7 +127,6 @@
 </template>
 
 <script>
-import { defineComponent, ref, computed, reactive, toRefs } from '@vue/composition-api'
 import YdInput from '../form-input/input.vue'
 import YdTextarea from '../form-input/textarea.vue'
 import YdCheckbox from '../form-checkbox/checkbox.vue'
@@ -139,10 +138,11 @@ import YdUploadImg from '../form-upload/uploadImg.vue'
 import YdUploadAudio from '../form-upload/uploadAudio.vue'
 import YdUploadFile from '../form-upload/uploadFile.vue'
 import YdUploadVideo from '../form-upload/uploadVideo.vue'
-import { useFormValidate } from '../hooks/index'
+import FormValidateMixin from '../mixins/useFormValidate1.js'
 
-export default defineComponent({
+export default {
   name: 'YdChildForm',
+  mixins: [FormValidateMixin],
   components: {
     YdInput,
     YdTextarea,
@@ -159,114 +159,109 @@ export default defineComponent({
   props: {
     item: {
       type: Object,
-      default: () => ({}),
+      default() {
+        return {}
+      },
     },
     modelValue: {
       type: Array,
-      default: () => [],
+      default() {
+        return []
+      },
     },
   },
-  setup(props, { emit }) {
-    const { item, modelValue } = toRefs(props)
-
-    // 最好不要直接更改propszheli
-    let current = computed(() => modelValue.value)
-    let childFormFileds = ref([])
-    const listFormRefs = reactive([])
-    const { rules } = useFormValidate(item.value.childrenForm)
-
-    let initModelValue = {}
-    // 子表单初始数据该由配置项自动生成，避免modelValue无值的情况
-    item.value.childrenForm.forEach((item) => {
-      if (
-        [
-          'child-form',
-          'upload-img',
-          'upload-audio',
-          'upload-video',
-          'upload-file',
-          'datetime-range-picker',
-        ].includes(item.type)
-      ) {
-        initModelValue[item.key] = []
-      } else if (['checkbox'].includes(item.type)) {
-        initModelValue[item.key] = false
-      } else {
-        initModelValue[item.key] = ''
-      }
-    })
-
+  data() {
+    return {
+      current: this.modelValue,
+      childFormFileds: [],
+      rules: {},
+      initModelValue: {},
+    }
+  },
+  created() {
+    this.rules = this.initFormRules(this.item.childrenForm)
+    this.initFormValue()
+    this.initChildFormFileds()
+  },
+  computed: {
     // 是否展示“添加按钮”
-    const addBtnVisible = computed(() => {
+    addBtnVisible() {
       if (
-        item.value.addEnable &&
-        (!item.value.addMaxLength || item.value.addMaxLength > childFormFileds.value.length)
+        this.item.addEnable &&
+        (!this.item.addMaxLength || this.item.addMaxLength > this.childFormFileds.length)
       ) {
         return true
       }
       return false
-    })
+    },
     // 计算添加按钮文案
-    const addBtnLabel = computed(() => {
-      if (item.value.addBtnLabel) {
-        return item.value.addBtnLabel
+    addBtnLabel() {
+      if (this.item.addBtnLabel) {
+        return this.item.addBtnLabel
       }
-      return `+新增${item.value.headerLabel}`
-    })
-
-    // 更新props.modelValue
-    const updateModelValue = () => {
-      current.value.push(JSON.parse(JSON.stringify(initModelValue)))
-      emit('update:modelValue', current.value)
-    }
-
-    // 给childFormFileds添加值
-    const setChildFormFileds = () => {
-      childFormFileds.value.push(item.value)
-    }
-
-    // 添加一个子表单到childFormFileds最后
-    const addChildForm = async () => {
-      setChildFormFileds()
-      updateModelValue()
-    }
-
+      return `+新增${this.item.headerLabel}`
+    },
+  },
+  methods: {
     // 初始化childFormFileds
-    const initChildFormFileds = () => {
+    initChildFormFileds() {
       let i = 0
-      while (i < modelValue.value?.length || 0) {
-        setChildFormFileds()
+      while (i < this.modelValue.length || 0) {
+        this.setChildFormFileds()
         i++
       }
-    }
+    },
+    // 初始化表单绑定的值
+    initFormValue() {
+      // 子表单初始数据该由配置项自动生成，避免modelValue无值的情况
+      this.item.childrenForm.forEach((item) => {
+        if (
+          [
+            'child-form',
+            'upload-img',
+            'upload-audio',
+            'upload-video',
+            'upload-file',
+            'datetime-range-picker',
+          ].includes(item.type)
+        ) {
+          this.initModelValue[item.key] = []
+        } else if (['checkbox'].includes(item.type)) {
+          this.initModelValue[item.key] = false
+        } else {
+          this.initModelValue[item.key] = ''
+        }
+      })
+    },
+    // 给childFormFileds添加值
+    setChildFormFileds() {
+      this.childFormFileds.push(this.item)
+    },
+    // 更新props.modelValue
+    updateModelValue() {
+      this.current.push(JSON.parse(JSON.stringify(this.initModelValue)))
+      this.$emit('update:modelValue', this.current)
+    },
+    // 添加一个子表单到childFormFileds最后
+    addChildForm() {
+      this.setChildFormFileds()
+      this.updateModelValue()
+    },
 
     // 删除一个子表单
-    const deleteChildForm = (index) => {
+    deleteChildForm(index) {
       // 更新childFormFileds
-      childFormFileds.value.splice(index, 1)
+      this.childFormFileds.splice(index, 1)
       // 更新current
-      current.value.splice(index, 1)
-      this.emit('input', current.value)
-    }
-
-    // 单个表单校验
-    const formValidate = async (formRef) => {
-      return formRef
-        .validate()
-        .then((valid) => {
-          return valid
-        })
-        .catch((err) => {
-          console.log('formValidate error', err)
-          return false
-        })
-    }
+      this.current.splice(index, 1)
+      this.$emit('input', this.current)
+    },
 
     // 所有子表单校验
-    const childFormValidate = async () => {
-      const arrValidateResults = Object.values(listFormRefs).map((formRef) => {
-        formRef.value ? formRef.value.map((val) => formValidate(val)) : [Promise.resolve(true)]
-      })
+    async childFormValidate() {
+      const arrValidateResults = this?.$refs?.listFormRefs?.map((formRef) => {
+        return this.formValidate(formRef)
+      }) || [Promise.resolve(true)]
       return Promise.all(arrValidateResults)
         .then((res) => {
           return !res.includes(false || undefined)
@@ -275,24 +270,9 @@ export default defineComponent({
           console.log('error', err)
           return false
         })
-    }
-
-    initChildFormFileds()
-    listFormRefs[`listFormRefs${item.value.key}`] = ref()
-
-    return {
-      addBtnLabel,
-      addBtnVisible,
-      childFormFileds,
-      addChildForm,
-      deleteChildForm,
-      current,
-      rules,
-      childFormValidate,
-      ...toRefs(listFormRefs),
-    }
+    },
   },
-})
+}
 </script>
 
 <style scoped lang="less">

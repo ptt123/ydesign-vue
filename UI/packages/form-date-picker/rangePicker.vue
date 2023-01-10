@@ -11,12 +11,8 @@
 </template>
 
 <script>
-// import { DatePicker } from 'ant-design-vue'
 export default {
   name: 'YdRangePicker',
-  components: {
-    // RangePicker: DatePicker.RangePicker,
-  },
   props: {
     modelValue: {
       type: Array,
