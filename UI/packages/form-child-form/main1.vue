@@ -30,6 +30,7 @@
                   :label="citem.label"
                   :wrapper-col="{ span: citem.wrapperColSpan || 12 }"
                   :prop="citem.key"
+                  :ref="citem.key"
                 >
                   <label slot="label">
                     {{ citem.label }}
@@ -42,18 +43,48 @@
                     :max-length="citem.maxlength"
                     :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
+                    @blur="
+                      () => {
+                        $refs[citem.key][0].onFieldBlur()
+                      }
+                    "
+                    @change="
+                      () => {
+                        $refs[citem.key][0].onFieldChange()
+                      }
+                    "
                   />
                   <YdTextarea
                     v-if="citem.type === 'textarea'"
                     :disabled="citem.disabled || false"
                     :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
+                    @blur="
+                      () => {
+                        $refs[citem.key][0].onFieldBlur()
+                      }
+                    "
+                    @change="
+                      () => {
+                        $refs[citem.key][0].onFieldChange()
+                      }
+                    "
                   />
                   <YdCheckbox
                     v-if="citem.type === 'checkbox'"
                     :disabled="citem.disabled || false"
                     :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
+                    @blur="
+                      () => {
+                        $refs[citem.key][0].onFieldBlur()
+                      }
+                    "
+                    @change="
+                      () => {
+                        $refs[citem.key][0].onFieldChange()
+                      }
+                    "
                   />
                   <YdSelect
                     v-if="citem.type === 'select'"
@@ -61,6 +92,16 @@
                     :disabled="citem.disabled || false"
                     :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
+                    @blur="
+                      () => {
+                        $refs[citem.key][0].onFieldBlur()
+                      }
+                    "
+                    @change="
+                      () => {
+                        $refs[citem.key][0].onFieldChange()
+                      }
+                    "
                   />
                   <YdRemotelySelect
                     v-if="citem.type === 'select-remotely'"
@@ -68,36 +109,96 @@
                     :disabled="citem.disabled || false"
                     :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
+                    @blur="
+                      () => {
+                        $refs[citem.key][0].onFieldBlur()
+                      }
+                    "
+                    @change="
+                      () => {
+                        $refs[citem.key][0].onFieldChange()
+                      }
+                    "
                   />
                   <YdUploadImg
                     v-if="citem.type === 'upload-img'"
                     :disabled="citem.disabled || false"
                     :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
+                    @blur="
+                      () => {
+                        $refs[citem.key][0].onFieldBlur()
+                      }
+                    "
+                    @change="
+                      () => {
+                        $refs[citem.key][0].onFieldChange()
+                      }
+                    "
                   />
                   <YdUploadAudio
                     v-if="citem.type === 'upload-audio'"
                     :disabled="citem.disabled || false"
                     :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
+                    @blur="
+                      () => {
+                        $refs[citem.key][0].onFieldBlur()
+                      }
+                    "
+                    @change="
+                      () => {
+                        $refs[citem.key][0].onFieldChange()
+                      }
+                    "
                   />
                   <YdUploadFile
                     v-if="citem.type === 'upload-file'"
                     :disabled="citem.disabled || false"
                     :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
+                    @blur="
+                      () => {
+                        $refs[citem.key][0].onFieldBlur()
+                      }
+                    "
+                    @change="
+                      () => {
+                        $refs[citem.key][0].onFieldChange()
+                      }
+                    "
                   />
                   <YdUploadVideo
                     v-if="citem.type === 'upload-video'"
                     :disabled="citem.disabled || false"
                     :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
+                    @blur="
+                      () => {
+                        $refs[citem.key][0].onFieldBlur()
+                      }
+                    "
+                    @change="
+                      () => {
+                        $refs[citem.key][0].onFieldChange()
+                      }
+                    "
                   />
                   <YdDatePicker
                     v-if="citem.type === 'datetime-picker'"
                     :disabled="citem.disabled || false"
                     :modelValue="current[index][citem.key]"
                     v-model="current[index][citem.key]"
+                    @blur="
+                      () => {
+                        $refs[citem.key][0].onFieldBlur()
+                      }
+                    "
+                    @change="
+                      () => {
+                        $refs[citem.key][0].onFieldChange()
+                      }
+                    "
                   />
                   <YdRangePicker
                     v-if="citem.type === 'datetime-range-picker'"
@@ -106,6 +207,16 @@
                     v-model="current[index][citem.key]"
                     v-bind:startKey.sync="current[index][citem.startKey]"
                     v-bind:endKey.sync="current[index][citem.endKey]"
+                    @blur="
+                      () => {
+                        $refs[citem.key][0].onFieldBlur()
+                      }
+                    "
+                    @change="
+                      () => {
+                        $refs[citem.key][0].onFieldChange()
+                      }
+                    "
                   />
                   <YdChildForm
                     :item="citem"

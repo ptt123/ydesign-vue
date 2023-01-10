@@ -86,6 +86,7 @@ export default {
               label: '上传图片',
               type: 'upload-img',
               key: 'img',
+              rule: [{ required: true, message: '请上传', trigger: 'change' }],
             },
             {
               label: '上传音频',
@@ -106,6 +107,7 @@ export default {
               label: '世间选择器',
               type: 'datetime-picker',
               key: 'dateTime',
+              rule: [{ required: true, message: '请选择', trigger: 'change' }],
             },
             {
               label: '时间范围选择',
@@ -113,6 +115,7 @@ export default {
               key: 'dateTimeRange',
               startKey: 'startTime',
               endKey: 'endTime',
+              rule: [{ required: true, message: '请选择', trigger: 'change' }],
             },
             {
               headerLabel: '子表单',
@@ -126,13 +129,13 @@ export default {
               childrenForm: [
                 {
                   label: '测试输入框',
-                  key: 'testInput1',
+                  key: 'testInput',
                   type: 'input',
                   rule: [{ required: true, message: '请输入', trigger: 'blur' }],
                 },
                 {
                   label: '测试选择框',
-                  key: 'testselect1',
+                  key: 'testselect',
                   type: 'select',
                   options: [
                     {
@@ -144,10 +147,11 @@ export default {
                       value: 2,
                     },
                   ],
+                  rule: [{ required: true, message: '请选择', trigger: 'change' }],
                 },
                 {
                   label: '远程选择框',
-                  key: 'testselectRemotely1',
+                  key: 'testselectRemotely',
                   type: 'select',
                   options: [
                     {
@@ -163,7 +167,8 @@ export default {
                 {
                   label: '多行文本框',
                   type: 'textarea',
-                  key: 'testtextarea1',
+                  key: 'testtextarea',
+                  rule: [{ required: true, message: '请输入', trigger: 'blur' }],
                 },
                 {
                   label: '复选框',
@@ -173,34 +178,37 @@ export default {
                 {
                   label: '上传图片',
                   type: 'upload-img',
-                  key: 'img1',
+                  key: 'img',
+                  rule: [{ required: true, message: '请上传', trigger: 'change' }],
                 },
                 {
                   label: '上传音频',
                   type: 'upload-audio',
-                  key: 'audio1',
+                  key: 'audio',
                 },
                 {
                   label: '上传文件',
                   type: 'upload-file',
-                  key: 'file1',
+                  key: 'file',
                 },
                 {
                   label: '上传视频',
                   type: 'upload-video',
-                  key: 'video1',
+                  key: 'video',
                 },
                 {
                   label: '世间选择器',
                   type: 'datetime-picker',
-                  key: 'dateTime1',
+                  key: 'dateTime',
+                  rule: [{ required: true, message: '请选择', trigger: 'change' }],
                 },
                 {
                   label: '时间范围选择',
                   type: 'datetime-range-picker',
-                  key: 'dateTimeRange1',
-                  startKey: 'startTime1',
-                  endKey: 'endTime1',
+                  key: 'dateTimeRange',
+                  startKey: 'startTime',
+                  endKey: 'endTime',
+                  rule: [{ required: true, message: '请选择', trigger: 'change' }],
                 },
               ],
             },

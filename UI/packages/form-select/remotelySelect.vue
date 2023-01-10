@@ -1,6 +1,6 @@
 <template>
   <div class="form-item-box form-select-remotely-box">
-    <Select v-model="val" :options="options" v-bind="$attrs" @change="onChange" />
+    <Select v-model="val" :options="options" v-bind="$attrs" v-on="$listeners" @change="onChange" />
   </div>
 </template>
 

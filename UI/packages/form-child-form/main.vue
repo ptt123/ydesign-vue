@@ -246,7 +246,7 @@ export default defineComponent({
       childFormFileds.value.splice(index, 1)
       // 更新current
       current.value.splice(index, 1)
-      this.emit('input', current.value)
+      this.$emit('input', current.value)
     }
 
     // 单个表单校验

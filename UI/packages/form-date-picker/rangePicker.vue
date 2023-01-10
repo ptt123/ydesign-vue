@@ -31,8 +31,8 @@ export default {
   },
   methods: {
     onChange(dates) {
-      this.emit('update:startKey', dates[0])
-      this.emit('update:endKey', dates[1])
+      this.$emit('update:startKey', dates[0])
+      this.$emit('update:endKey', dates[1])
     },
   },
 }

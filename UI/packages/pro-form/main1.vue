@@ -20,6 +20,7 @@
               :label="item.label"
               :wrapper-col="{ span: item.wrapperColSpan || 12 }"
               :prop="item.key"
+              :ref="item.key"
             >
               <label slot="label" v-if="item.label">
                 <label v-if="item.type == 'child-form'" class="child-form-title">{{
@@ -35,18 +36,48 @@
                 :max-length="item.maxlength"
                 :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
+                @blur="
+                  () => {
+                    $refs[item.key][0].onFieldBlur()
+                  }
+                "
+                @change="
+                  () => {
+                    $refs[item.key][0].onFieldChange()
+                  }
+                "
               />
               <YdTextarea
                 v-if="item.type === 'textarea'"
                 :disabled="item.disabled || false"
                 :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
+                @blur="
+                  () => {
+                    $refs[item.key][0].onFieldBlur()
+                  }
+                "
+                @change="
+                  () => {
+                    $refs[item.key][0].onFieldChange()
+                  }
+                "
               />
               <YdCheckbox
                 v-if="item.type === 'checkbox'"
                 :disabled="item.disabled || false"
                 :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
+                @blur="
+                  () => {
+                    $refs[item.key][0].onFieldBlur()
+                  }
+                "
+                @change="
+                  () => {
+                    $refs[item.key][0].onFieldChange()
+                  }
+                "
               />
               <YdSelect
                 v-if="item.type === 'select'"
@@ -54,6 +85,16 @@
                 :disabled="item.disabled || false"
                 :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
+                @blur="
+                  () => {
+                    $refs[item.key][0].onFieldBlur()
+                  }
+                "
+                @change="
+                  () => {
+                    $refs[item.key][0].onFieldChange()
+                  }
+                "
               />
               <YdRemotelySelect
                 v-if="item.type === 'select-remotely'"
@@ -61,36 +102,96 @@
                 :disabled="item.disabled || false"
                 :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
+                @blur="
+                  () => {
+                    $refs[item.key][0].onFieldBlur()
+                  }
+                "
+                @change="
+                  () => {
+                    $refs[item.key][0].onFieldChange()
+                  }
+                "
               />
               <YdUploadImg
                 v-if="item.type === 'upload-img'"
                 :disabled="item.disabled || false"
                 :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
+                @blur="
+                  () => {
+                    $refs[item.key][0].onFieldBlur()
+                  }
+                "
+                @change="
+                  () => {
+                    $refs[item.key][0].onFieldChange()
+                  }
+                "
               />
               <YdUploadAudio
                 v-if="item.type === 'upload-audio'"
                 :disabled="item.disabled || false"
                 :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
+                @blur="
+                  () => {
+                    $refs[item.key][0].onFieldBlur()
+                  }
+                "
+                @change="
+                  () => {
+                    $refs[item.key][0].onFieldChange()
+                  }
+                "
               />
               <YdUploadFile
                 v-if="item.type === 'upload-file'"
                 :disabled="item.disabled || false"
                 :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
+                @blur="
+                  () => {
+                    $refs[item.key][0].onFieldBlur()
+                  }
+                "
+                @change="
+                  () => {
+                    $refs[item.key][0].onFieldChange()
+                  }
+                "
               />
               <YdUploadVideo
                 v-if="item.type === 'upload-video'"
                 :disabled="item.disabled || false"
                 :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
+                @blur="
+                  () => {
+                    $refs[item.key][0].onFieldBlur()
+                  }
+                "
+                @change="
+                  () => {
+                    $refs[item.key][0].onFieldChange()
+                  }
+                "
               />
               <YdDatePicker
                 v-if="item.type === 'datetime-picker'"
                 :disabled="item.disabled || false"
                 :modelValue="formData[item.key]"
                 v-model="formData[item.key]"
+                @blur="
+                  () => {
+                    $refs[item.key][0].onFieldBlur()
+                  }
+                "
+                @change="
+                  () => {
+                    $refs[item.key][0].onFieldChange()
+                  }
+                "
               />
               <YdRangePicker
                 v-if="item.type === 'datetime-range-picker'"
@@ -99,6 +200,16 @@
                 v-model="formData[item.key]"
                 v-bind:startKey.sync="formData[item.startKey]"
                 v-bind:endKey.sync="formData[item.endKey]"
+                @blur="
+                  () => {
+                    $refs[item.key][0].onFieldBlur()
+                  }
+                "
+                @change="
+                  () => {
+                    $refs[item.key][0].onFieldChange()
+                  }
+                "
               />
               <YdChildForm
                 :item="item"
