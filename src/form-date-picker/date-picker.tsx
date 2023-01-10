@@ -1,5 +1,4 @@
 import { defineComponent, computed, toRefs } from 'vue'
-import { DatePicker } from 'ant-design-vue'
 import props from './props'
 
 export default defineComponent({
@@ -15,11 +14,11 @@ export default defineComponent({
 
     return () => (
       <div class="form-item-box form-date-picker-box">
-        <DatePicker
+        <lib-datePicker
           v-model:value={val.value}
           {...attrs}
           valueFormat="YYYY-MM-DD HH:mm:ss"
-        ></DatePicker>
+        ></lib-datePicker>
       </div>
     )
   },

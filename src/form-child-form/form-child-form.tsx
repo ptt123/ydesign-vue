@@ -4,8 +4,6 @@ import { FormCheckbox, FormCheckboxGroup } from '../form-checkbox'
 import { FormDatePicker, FormRangePicker } from '../form-date-picker'
 import { FormSelect, FormSelectRemotely } from '../form-select'
 import { FormUploadImg, FormUploadAudio, FormUploadFile, FormUploadVideo } from '../form-upload'
-import { Form, FormItem, Row, Col } from 'ant-design-vue'
-import { cloneDeep } from 'lodash'
 import { useFormValidate } from '../hooks/index'
 import props from './props'
 
@@ -14,10 +12,6 @@ import './index.less'
 export default defineComponent({
   name: 'YdFormChildForm',
   components: {
-    'a-form': Form,
-    'a-form-item': FormItem,
-    'a-row': Row,
-    'a-col': Col,
     FormCheckbox,
     FormCheckboxGroup,
     FormInput,
@@ -86,7 +80,7 @@ export default defineComponent({
 
     // 更新props.modelValue
     const updateModelValue = () => {
-      current.value.push(cloneDeep(initModelValue))
+      current.value.push(JSON.parse(JSON.stringify(initModelValue)))
       emit('update:modelValue', current.value)
     }
 
@@ -155,7 +149,7 @@ export default defineComponent({
      */
     const renderFormItem = (citem: FormItem, index: number) => {
       return (
-        <a-form-item
+        <lib-form-item
           label-col={{ span: citem.labelColSpan || 6 }}
           label={citem.label}
           wrapper-col={{ span: citem.wrapperColSpan || 12 }}
@@ -249,7 +243,7 @@ export default defineComponent({
               v-model:endKey={current.value[index][citem.endKey!]}
             ></form-range-picker>
           )}
-        </a-form-item>
+        </lib-form-item>
       )
     }
 
@@ -296,7 +290,7 @@ export default defineComponent({
                 {renderDelBtn(index)}
               </div>
               <div class="child-form-body">
-                <a-form
+                <lib-form
                   label-col={{ span: 4 }}
                   wrapper-col={{ span: 24 }}
                   ref={(el: any) => {
@@ -305,19 +299,21 @@ export default defineComponent({
                   rules={rules.value}
                   model={current.value[index]}
                 >
-                  <a-row>
+                  <lib-row>
                     {item.value.childrenForm.map((citem: FormItem) => {
                       if (
                         !citem.linkKey ||
                         citem.linkValue === current.value[index][citem.linkKey]
                       ) {
                         return (
-                          <a-col span={citem.colSpan || 12}>{renderFormItem(citem, index)}</a-col>
+                          <lib-col span={citem.colSpan || 12}>
+                            {renderFormItem(citem, index)}
+                          </lib-col>
                         )
                       }
                     })}
-                  </a-row>
-                </a-form>
+                  </lib-row>
+                </lib-form>
               </div>
             </div>
           )

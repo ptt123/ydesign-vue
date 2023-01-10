@@ -1,6 +1,5 @@
 import { defineComponent, computed, toRefs } from 'vue'
 import props from './range-picker-props'
-import { RangePicker } from 'ant-design-vue'
 
 export default defineComponent({
   name: 'YdFormRangePicker',
@@ -19,12 +18,12 @@ export default defineComponent({
 
     return () => (
       <div class="form-item-box form-range-picker-box">
-        <RangePicker
+        <lib-rangePicker
           v-model:value={val.value}
           {...attrs}
           onChange={onChange}
           valueFormat="YYYY-MM-DD HH:mm:ss"
-        ></RangePicker>
+        ></lib-rangePicker>
       </div>
     )
   },

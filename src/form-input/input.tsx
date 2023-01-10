@@ -1,6 +1,5 @@
 import { defineComponent, toRefs, computed } from 'vue'
 import props from './props'
-import { Input } from 'ant-design-vue'
 
 export default defineComponent({
   name: 'YdFormInput',
@@ -15,7 +14,7 @@ export default defineComponent({
 
     return () => (
       <div class="form-item-box form-input-box">
-        <Input v-model:value={val.value} {...attrs}></Input>
+        <lib-input v-model:value={val.value} {...attrs}></lib-input>
       </div>
     )
   },

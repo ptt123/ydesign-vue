@@ -40,11 +40,13 @@
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
+    "@types/ali-oss": "^6.16.7",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "@vitejs/plugin-vue": "^3.1.0",
     "@vitejs/plugin-vue-jsx": "^2.0.1",
-    "ant-design-vue": "^3.2.12",
+    "ali-oss": "^6.17.1",
+    "ant-design-vue": "^3.2.15",
     "commitizen": "^4.2.5",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
@@ -69,9 +71,6 @@
     "vue-router": "^4.1.5"
   },
   "peerDependencies": {
-    "ali-oss": "^6.17.1",
-    "ant-design-vue": ">=3.2.10",
-    "vue": ">=3.1.0",
-    "lodash": "^4.17.21"
+    "vue": ">=3.1.0"
   }
 }

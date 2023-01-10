@@ -5,7 +5,6 @@ import { FormDatePicker, FormRangePicker } from '../form-date-picker'
 import { FormSelect, FormSelectRemotely } from '../form-select'
 import { FormUploadImg, FormUploadAudio, FormUploadFile, FormUploadVideo } from '../form-upload'
 import { FormChildForm } from '../form-child-form'
-import { Form, FormItem, Row, Col } from 'ant-design-vue'
 import { useFormValidate } from '../hooks/index'
 import props from './props'
 
@@ -14,10 +13,6 @@ import './index.less'
 export default defineComponent({
   name: 'YdProForm',
   components: {
-    'a-form': Form,
-    'a-form-item': FormItem,
-    'a-row': Row,
-    'a-col': Col,
     FormCheckbox,
     FormCheckboxGroup,
     FormInput,
@@ -52,7 +47,7 @@ export default defineComponent({
 
     const renderFormItem = (item: FormItem) => {
       return (
-        <a-form-item
+        <lib-form-item
           label={item.label}
           label-col={{ span: item.labelColSpan || 6 }}
           wrapper-col={{ span: item.wrapperColSpan || 12 }}
@@ -155,7 +150,7 @@ export default defineComponent({
               v-model:modelValue={formData.value[item.key]}
             ></form-child-form>
           )}
-        </a-form-item>
+        </lib-form-item>
       )
     }
 
@@ -163,7 +158,7 @@ export default defineComponent({
     expose({ resetForm, validate })
 
     return () => (
-      <a-form
+      <lib-form
         label-col={{ span: 4 }}
         wrapper-col={{ span: 16 }}
         ref={formRef}
@@ -174,20 +169,20 @@ export default defineComponent({
           return (
             <>
               <label class="block-title">{pitem.label}</label>
-              <a-row>
+              <lib-row>
                 {pitem.children.map((item) => {
                   return (
-                    <a-col span={item.colSpan || 12}>
+                    <lib-col span={item.colSpan || 12}>
                       {(!item.linkKey || item.linkValue === formData.value[item.linkKey]) &&
                         renderFormItem(item)}
-                    </a-col>
+                    </lib-col>
                   )
                 })}
-              </a-row>
+              </lib-row>
             </>
           )
         })}
-      </a-form>
+      </lib-form>
     )
   },
 })

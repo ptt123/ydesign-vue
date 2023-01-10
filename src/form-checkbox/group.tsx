@@ -1,6 +1,5 @@
 import { defineComponent, toRefs, computed } from 'vue'
 import props from './checkbox-group-props'
-import { CheckboxGroup } from 'ant-design-vue'
 
 export default defineComponent({
   name: 'YdFormCheckboxGroup',
@@ -15,11 +14,11 @@ export default defineComponent({
 
     return () => (
       <div class="form-item-box form-checkbox-group-box">
-        <CheckboxGroup
+        <lib-checkboxGroup
           v-model:value={val.value}
           options={item.value.options}
           {...attrs}
-        ></CheckboxGroup>
+        ></lib-checkboxGroup>
       </div>
     )
   },

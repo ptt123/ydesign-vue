@@ -1,6 +1,5 @@
 import { defineComponent, toRefs, computed } from 'vue'
 import props from './props'
-import { Textarea } from 'ant-design-vue'
 
 export default defineComponent({
   name: 'YdFormTextarea',
@@ -15,7 +14,7 @@ export default defineComponent({
 
     return () => (
       <div class="form-item-box form-input-box">
-        <Textarea v-model:value={val.value} {...attrs} auto-size></Textarea>
+        <lib-textarea v-model:value={val.value} {...attrs} auto-size></lib-textarea>
       </div>
     )
   },

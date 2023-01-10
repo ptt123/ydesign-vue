@@ -1,6 +1,5 @@
 import { defineComponent, toRefs, computed } from 'vue'
 import props from './props'
-import { Select } from 'ant-design-vue'
 
 export default defineComponent({
   name: 'YdFormSelect',
@@ -15,7 +14,7 @@ export default defineComponent({
 
     return () => (
       <div class="form-item-box form-select-box">
-        <Select v-model:value={val.value} options={item.value.options} {...attrs}></Select>
+        <lib-select v-model:value={val.value} options={item.value.options} {...attrs}></lib-select>
       </div>
     )
   },

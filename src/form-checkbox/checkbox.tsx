@@ -1,5 +1,4 @@
 import { defineComponent, toRefs, computed } from 'vue'
-import { Checkbox } from 'ant-design-vue'
 import props from './props'
 
 export default defineComponent({
@@ -17,7 +16,7 @@ export default defineComponent({
     })
     return () => (
       <div class="form-item-box form-checkbox-box">
-        <Checkbox v-model:checked={val.value} {...attrs}></Checkbox>
+        <lib-checkbox v-model:checked={val.value} {...attrs}></lib-checkbox>
       </div>
     )
   },

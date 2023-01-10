@@ -1,5 +1,4 @@
-import { defineComponent, toRefs } from 'vue'
-import OSS from 'ali-oss'
+import { inject, defineComponent, toRefs } from 'vue'
 import props from './props'
 import './index.less'
 
@@ -8,6 +7,7 @@ export default defineComponent({
   props,
   emits: ['update:fileList'],
   setup(props, { emit }) {
+    const OSS: any = inject('OSS')
     const { disabled, maxSize, fileType, dir, fileName, fileList } = toRefs(props)
     let client = undefined as any
 
