@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Button } from 'ant-design-vue'
-import { YdProFormProps } from '../../src/index'
 const formData = ref({
   childForm: [
     {
@@ -36,7 +35,7 @@ const formData = ref({
   startTime: '',
   endTime: '',
 })
-const formConfig: YdProFormProps['formConfig'] = [
+const formConfig = [
   {
     label: '测试表单1',
     children: [
@@ -313,7 +312,7 @@ const formConfig: YdProFormProps['formConfig'] = [
 ]
 const proFormRef = ref()
 const onSubmit = () => {
-  proFormRef.value.validate().then((valid) => {
+  proFormRef.value.validate().then((valid: boolean) => {
     console.log('valid', valid)
   })
 }

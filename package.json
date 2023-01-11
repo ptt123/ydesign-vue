@@ -2,7 +2,14 @@
   "name": "ydesign-vue",
   "version": "1.0.0",
   "description": "YDesign Component for vue",
-  "main": "lib/index-lib.js",
+  "main": "dist/ydesign.umd.js",
+  "module": "dist/ydesign.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/ydesign.es.js",
+      "require": "./dist/ydesign.umd.js"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ptt123/ydesign-vue.git"
@@ -12,10 +19,8 @@
     "url": "https://github.com/ptt123/ydesign-vue/issues"
   },
   "scripts": {
-    "start": "npm run dev",
-    "dev": "cd site && vite",
-    "site:build": "cd site && vite build --debug",
-    "test": "npm run test:unit && npm run test:node",
+    "dev": "cd examples && vite",
+    "lib": "vite build",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "lint:check": "eslint .",

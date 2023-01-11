@@ -15,7 +15,11 @@ import {
 } from 'ant-design-vue'
 
 import 'ant-design-vue/dist/antd.css'
-import YDesign from '../../src/index'
+
+// import YDesign from '../../packages/index'
+// @ts-ignore
+import YDesign from '../../dist/ydesign.umd'
+import '../../dist/style.css'
 
 import App from './App.vue'
 
